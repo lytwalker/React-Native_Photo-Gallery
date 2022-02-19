@@ -13,7 +13,7 @@ const Screen1 = ({ navigation, route }) => {
             <Button
                 title="Go to Screen 2"
                 onPress={() => {
-                    navigation.push("Screen2", { paramA: "Hello!" });
+                    navigation.push("Breed List", { breed: "african" });
                 }}
             />
         </View>
@@ -28,7 +28,7 @@ const Screen2 = ({ route }) => {
         dispatch(actionCreators.loading());
 
         try {
-            const nextBreedsListPhotos = await getBreedList("hound", nextPage);
+            const nextBreedsListPhotos = await getBreedList(route.params.breed, nextPage);
             dispatch(actionCreators.success(nextBreedsListPhotos, nextPage));
         } catch (e) {
             dispatch(actionCreators.failure());
@@ -57,7 +57,7 @@ const Screen2 = ({ route }) => {
 
     return (
         <View style={styles.container}>
-            <Text>{route.params.paramA}</Text>
+            <Text>{route.params.breed}</Text>
             <ImageGrid numColumns={3} photos={photos} onEndReached={fetchPhotos} />
         </View>
     );
@@ -69,8 +69,8 @@ function App() {
     return (
         <NavigationContainer>
             <Root.Navigator>
-                <Root.Screen name="Homepage" component={Screen1} />
-                <Root.Screen name="Breeds" component={Screen2} />
+                <Root.Screen name="Welcome" component={Screen1} />
+                <Root.Screen name="Breed List" component={Screen2} />
             </Root.Navigator>
         </NavigationContainer>
     );
