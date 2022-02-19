@@ -1,7 +1,7 @@
 const BASE_URL = `https://dog.ceo/api/breed`;
 
-export async function getBreedList(breed = "affenpinscher", page = 1) {
-    const response = await fetch(`${BASE_URL}/${breed}/images?page=${page}`, {
+export async function getBreedList(breed = "affenpinscher", page = 10) {
+    const response = await fetch(`${BASE_URL}/${breed}/images/random/${page}`, {
         method: "GET",
         dataType: "json",
     });

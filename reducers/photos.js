@@ -17,7 +17,7 @@ export const initialState = {
     loading: false,
     error: false,
     photos: [],
-    nextPage: 1,
+    nextPage: 10,
 };
 
 export function reducer(state, action) {
@@ -30,7 +30,7 @@ export function reducer(state, action) {
                 loading: false,
                 error: false,
                 photos: [...state.photos, ...action.payload.photos],
-                nextPage: state.nextPage + 1,
+                nextPage: state.nextPage + 10,
             };
         case types.FAILURE:
             return { ...state, loading: false, error: true };
