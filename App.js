@@ -1,9 +1,9 @@
 import React, { useEffect, useReducer, useCallback } from "react";
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 
-import { getList } from "./api/picsum";
+import { getBreedList } from "./api/dogapi";
 import { actionCreators, initialState, reducer } from "./reducers/photos";
-import PhotoGrid from "./components/PhotoGrid";
+import ImageGrid from "./components/ImageGrid";
 
 export default function App() {
     const [state, dispatch] = useReducer(reducer, initialState);
@@ -14,8 +14,8 @@ export default function App() {
         dispatch(actionCreators.loading());
 
         try {
-            const nextPhotos = await getList(nextPage);
-            dispatch(actionCreators.success(nextPhotos, nextPage));
+            const nextBreedsListPhotos = await getBreedList("hound", nextPage);
+            dispatch(actionCreators.success(nextBreedsListPhotos, nextPage));
         } catch (e) {
             dispatch(actionCreators.failure());
         }
@@ -39,7 +39,7 @@ export default function App() {
         );
     }
 
-    return <PhotoGrid numColumns={3} photos={photos} onEndReached={fetchPhotos} />;
+    return <ImageGrid numColumns={3} photos={photos} onEndReached={fetchPhotos} />;
 }
 
 const styles = StyleSheet.create({
