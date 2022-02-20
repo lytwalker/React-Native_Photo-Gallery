@@ -1,9 +1,8 @@
 import React from "react";
-import { Dimensions, FlatList, Image } from "react-native";
+import { Dimensions, FlatList } from "react-native";
+import ListItem from "./ListItem";
 
-import { formatPhotoUri } from "../api/dogapi";
-
-export default function ImageGrid({ photos, numColumns, onEndReached }) {
+function ImageGrid({ photos, numColumns, onEndReached, navigation }) {
     const { width } = Dimensions.get("window");
 
     const size = width / numColumns;
@@ -15,14 +14,10 @@ export default function ImageGrid({ photos, numColumns, onEndReached }) {
             numColumns={numColumns}
             onEndReached={onEndReached}
             renderItem={({ item, index }) => (
-                <Image
-                    source={{
-                        width: size,
-                        height: size,
-                        uri: `${formatPhotoUri(item, index, size, size)}`,
-                    }}
-                />
+                <ListItem item={item} index={index} size={size} navigation={navigation} />
             )}
         />
     );
 }
+
+export default ImageGrid;

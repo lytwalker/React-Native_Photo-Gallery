@@ -1,5 +1,5 @@
 import React, { useEffect, useReducer, useCallback } from "react";
-import { ActivityIndicator, StyleSheet, View, Text, Button } from "react-native";
+import { ActivityIndicator, Dimensions, StyleSheet, View, Image, Text, Button } from "react-native";
 import { NavigationContainer, useNavigation, useRoute } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
@@ -19,7 +19,7 @@ const Screen1 = ({ navigation, route }) => {
         </View>
     );
 };
-const Screen2 = ({ route }) => {
+const Screen2 = ({ navigation, route }) => {
     const [state, dispatch] = useReducer(reducer, initialState);
 
     const { photos, nextPage, loading, error } = state;
@@ -58,7 +58,28 @@ const Screen2 = ({ route }) => {
     return (
         <View style={styles.container}>
             <Text>{route.params.breed}</Text>
-            <ImageGrid numColumns={3} photos={photos} onEndReached={fetchPhotos} />
+            <ImageGrid
+                numColumns={3}
+                photos={photos}
+                onEndReached={fetchPhotos}
+                navigation={navigation}
+            />
+        </View>
+    );
+};
+
+const Screen3 = ({ navigation, route }) => {
+    const size = Dimensions.get("window").width / 2;
+    return (
+        <View style={styles.container}>
+            <Image
+                style={styles.bigImage}
+                source={{ uri: route.params.dogUrl, width: size, height: size }}
+            />
+            <Text style={styles.listItemText}>{route.params.dogUrl}</Text>
+
+            <Button title="Save" onPress={() => {}} />
+            <Button title="Share" onPress={() => {}} />
         </View>
     );
 };
@@ -71,6 +92,7 @@ function App() {
             <Root.Navigator>
                 <Root.Screen name="Welcome" component={Screen1} />
                 <Root.Screen name="Breed List" component={Screen2} />
+                <Root.Screen name="Dog" component={Screen3} />
             </Root.Navigator>
         </NavigationContainer>
     );
@@ -79,10 +101,11 @@ function App() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#fff",
+        backgroundColor: "#eee",
         alignItems: "center",
         justifyContent: "center",
     },
+    bigImage: {},
 });
 
 export default App;
