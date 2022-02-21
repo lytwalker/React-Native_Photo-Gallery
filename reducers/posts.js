@@ -7,17 +7,13 @@ const types = {
 export const actionCreators = {
     loading: () => ({ type: types.LOADING }),
     failure: () => ({ type: types.FAILURE }),
-    success: (photos, page) => ({
-        type: types.SUCCESS,
-        payload: { photos, page },
-    }),
+    success: (payload) => ({ type: types.SUCCESS, payload }),
 };
 
 export const initialState = {
-    loading: false,
+    loading: true,
     error: false,
-    photos: [],
-    nextPage: 18,
+    posts: [],
 };
 
 export function reducer(state, action) {
@@ -25,13 +21,7 @@ export function reducer(state, action) {
         case types.LOADING:
             return { ...state, loading: true, error: false };
         case types.SUCCESS:
-            return {
-                ...state,
-                loading: false,
-                error: false,
-                photos: [...state.photos, ...action.payload.photos],
-                nextPage: state.nextPage /* + 1*/,
-            };
+            return { loading: false, error: false, posts: action.payload };
         case types.FAILURE:
             return { ...state, loading: false, error: true };
     }
