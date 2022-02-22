@@ -1,15 +1,11 @@
 import React from "react";
-import { StyleSheet, SafeAreaView, Button } from "react-native";
+import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import HomeScreen from "../screens/HomeScreen";
 import ByBreed from "../screens/ByBreed";
 import DogDetails from "../screens/DogDetails";
-
-<HomeScreen />;
-<ByBreed />;
-<DogDetails />;
 
 const Stack = createStackNavigator();
 
@@ -19,7 +15,7 @@ const Screens = ({ navigation, route }) => {
             <Stack.Navigator
                 screenOptions={{
                     headerStyle: {
-                        backgroundColor: "#f4511e",
+                        backgroundColor: "dodgerblue",
                     },
                     headerTitleAlign: "center",
                     headerTintColor: "#fff",

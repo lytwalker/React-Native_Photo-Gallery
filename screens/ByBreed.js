@@ -43,7 +43,7 @@ const ByBreed = ({ navigation, route }) => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <Text>{route.params.breed}</Text>
+            <Text style={styles.text}>{route.params.breed}</Text>
             <ImageGrid
                 numColumns={3}
                 photos={photos}
@@ -59,6 +59,14 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: "center",
         justifyContent: "center",
+    },
+    text: {
+        fontSize: 20,
+        textAlign: "center",
+        textTransform: "capitalize",
+        position: "absolute",
+        zIndex: 1,
+        margin: 10,
     },
 });
 
