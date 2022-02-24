@@ -17,7 +17,7 @@ const DogDetails = ({ navigation, route }) => {
                     style={styles.button}
                     title="Share"
                     onPress={() => {
-                        console.log("selectedImage: ", selectedImage);
+                        // console.log("selectedImage: ", selectedImage);
                         if (selectedImage.localUri === undefined)
                             alert("Please download the image first.");
                         else openShareDialogAsync(selectedImage.localUri);
