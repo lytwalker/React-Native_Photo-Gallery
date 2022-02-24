@@ -1,8 +1,23 @@
-import React from "react";
-import { StyleSheet, SafeAreaView, ImageBackground, Button } from "react-native";
+import React, { useEffect, useState } from "react";
+import { StyleSheet, SafeAreaView, ImageBackground, Text } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
+import { getListAllBreeds } from "../api/dogapi";
+import ButtonGrid from "../components/ButtonGrid";
+
 const HomeScreen = ({ navigation, route }) => {
+    const [breedsList, setbreedsList] = useState([]);
+
+    useEffect(() => {
+        getListAllBreeds()
+            .then((breedsList) => {
+                setbreedsList(breedsList);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }, []);
+
     return (
         <SafeAreaView style={styles.container}>
             <ImageBackground
@@ -14,13 +29,8 @@ const HomeScreen = ({ navigation, route }) => {
                 start={[0.7, 0.1]}
                 end={[1, 0.8]}
                 style={styles.background}>
-                <Button
-                    title="Let's get started"
-                    styles={styles.button}
-                    onPress={() => {
-                        navigation.push("Breed List", { breed: "african" });
-                    }}
-                />
+                <Text style={styles.title}>Please select a breed</Text>
+                <ButtonGrid numColumns={3} breeds={breedsList} navigation={navigation} />
             </LinearGradient>
         </SafeAreaView>
     );
@@ -46,7 +56,16 @@ const styles = StyleSheet.create({
         width: "100%",
         alignItems: "center",
     },
-    button: {},
+    title: {
+        fontSize: 30,
+        fontWeight: "bold",
+        color: "#fff",
+        textTransform: "capitalize",
+        textShadowColor: "#000",
+        textShadowOffset: { width: 1, height: 1 },
+        textShadowRadius: 10,
+        margin: 20,
+    },
 });
 
 export default HomeScreen;

@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useCallback } from "react";
+import React, { useEffect, useReducer, useCallback, useState, useLayoutEffect } from "react";
 import { ActivityIndicator, StyleSheet, SafeAreaView, Text } from "react-native";
 
 import { getBreedList } from "../api/dogapi";
@@ -6,9 +6,9 @@ import { actionCreators, initialState, reducer } from "../reducers/photos";
 import ImageGrid from "../components/ImageGrid";
 
 const ByBreed = ({ navigation, route }) => {
-    const [value, onChangeText] = React.useState(route.params.breed);
+    const [value, onChangeText] = useState(route.params.breed);
 
-    React.useLayoutEffect(() => {
+    useLayoutEffect(() => {
         navigation.setOptions({
             title: value === "" ? "No title" : value,
         });

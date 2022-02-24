@@ -6,8 +6,8 @@ export async function getListAllBreeds() {
         dataType: "json",
     });
     const breeds = await response.json();
-    console.log("List All Breeds: ", breeds.message);
-    return breeds.message;
+    // console.log("List All Breeds: ", breeds.message);
+    return Object.keys(breeds.message);
 }
 
 export async function getBreedList(breed = "affenpinscher", random = 1) {

@@ -1,27 +1,42 @@
 import React from "react";
-import { Dimensions, FlatList } from "react-native";
+import { StyleSheet, Dimensions, FlatList, View, Button } from "react-native";
 
-function ButtonGrid({ photos, numColumns, onEndReached, navigation }) {
+function ButtonGrid({ breeds, numColumns, navigation }) {
     const { width } = Dimensions.get("window");
 
     const size = width / numColumns;
 
     return (
         <FlatList
-            data={photos}
+            data={breeds}
             keyExtractor={(item, index) => index}
             numColumns={numColumns}
-            onEndReached={onEndReached}
             renderItem={({ item, index }) => (
-                <Button
-                    title={"Go to Screen 2"}
-                    onPress={() => {
-                        navigation.push("Breed List", { breed: "african" });
-                    }}
-                />
+                <View style={styles.listView}>
+                    <Button
+                        title={item}
+                        styles={styles.button}
+                        onPress={() => {
+                            navigation.push("Breed List", { breed: item });
+                        }}
+                    />
+                </View>
             )}
         />
     );
 }
+
+const styles = StyleSheet.create({
+    listView: {
+        flex: 0,
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: 10,
+    },
+    button: {
+        // flex: 1,
+    },
+});
 
 export default ButtonGrid;
