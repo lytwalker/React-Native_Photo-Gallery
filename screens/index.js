@@ -21,6 +21,7 @@ const Screens = ({ navigation, route }) => {
                     headerTintColor: "#fff",
                     headerTitleStyle: {
                         fontWeight: "bold",
+                        textTransform: "capitalize",
                     },
                 }}>
                 <Stack.Screen name="Welcome" component={HomeScreen} />

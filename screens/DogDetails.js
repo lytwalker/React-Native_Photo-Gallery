@@ -2,6 +2,7 @@ import React from "react";
 import { Dimensions, StyleSheet, SafeAreaView, Image, Text, Button } from "react-native";
 
 import { downloadFile, _handlePressImage } from "../reducers/downloads";
+// import { downloadFileWithUrl } from "../reducers/downloadFiles";
 
 const DogDetails = ({ navigation, route }) => {
     const _height = Dimensions.get("window").height / 2;
@@ -19,6 +20,7 @@ const DogDetails = ({ navigation, route }) => {
                 color="green"
                 onPress={() => {
                     // _handlePressImage(route.params.dogUrl);
+                    // downloadFileWithUrl(route.params.dogUrl);
                     downloadFile(route.params.dogUrl);
                 }}
             />

@@ -6,6 +6,14 @@ import { actionCreators, initialState, reducer } from "../reducers/photos";
 import ImageGrid from "../components/ImageGrid";
 
 const ByBreed = ({ navigation, route }) => {
+    const [value, onChangeText] = React.useState(route.params.breed);
+
+    React.useLayoutEffect(() => {
+        navigation.setOptions({
+            title: value === "" ? "No title" : value,
+        });
+    }, [navigation, value]);
+
     const [state, dispatch] = useReducer(reducer, initialState);
 
     const { photos, nextPage, loading, error } = state;
@@ -43,7 +51,6 @@ const ByBreed = ({ navigation, route }) => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <Text style={styles.text}>{route.params.breed}</Text>
             <ImageGrid
                 numColumns={3}
                 photos={photos}
