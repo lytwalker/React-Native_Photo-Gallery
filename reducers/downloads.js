@@ -6,19 +6,21 @@ export function downloadFile(imageUrl) {
     const uri = imageUrl;
     let fileName = getSubscrtringBetween(uri, "/", ".jpg");
     let fileUri = FileSystem.documentDirectory + `${fileName}.jpg`;
-    console.log(fileUri);
+    // console.log(fileUri);
     FileSystem.downloadAsync(uri, fileUri)
         .then(({ uri }) => {
             saveFile(uri);
             console.log("Finished downloading to ", uri);
         })
         .catch((error) => {
-            console.error(error);
+            alert(error.message);
+            // console.error(error);
         });
+    return fileUri;
 }
 
 const saveFile = async (fileUri) => {
-    console.log("inside saveFile: ", fileUri);
+    // console.log("inside saveFile: ", fileUri);
     const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
     if (status === "granted") {
         const asset = await MediaLibrary.createAssetAsync(fileUri);
