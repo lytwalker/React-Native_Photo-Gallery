@@ -1,5 +1,5 @@
 import React from "react";
-import { Dimensions, StyleSheet, SafeAreaView, Image, Text, Button } from "react-native";
+import { Dimensions, StyleSheet, SafeAreaView, View, Image, Text, Button } from "react-native";
 
 import { downloadFile, _handlePressImage } from "../reducers/downloads";
 // import { downloadFileWithUrl } from "../reducers/downloadFiles";
@@ -8,23 +8,27 @@ const DogDetails = ({ navigation, route }) => {
     const _height = Dimensions.get("window").height / 2;
     return (
         <SafeAreaView style={styles.container}>
+            <View style={styles.buttonContainer}>
+                <Button style={styles.button} title="Share" onPress={() => {}} />
+            </View>
+
             <Image
                 style={styles.bigImage}
                 source={{ uri: route.params.dogUrl, width: "100%", height: _height }}
             />
-            <Text style={styles.text}>{route.params.dogUrl}</Text>
 
-            <Button
-                style={styles.button}
-                title="Download"
-                color="green"
-                onPress={() => {
-                    // _handlePressImage(route.params.dogUrl);
-                    // downloadFileWithUrl(route.params.dogUrl);
-                    downloadFile(route.params.dogUrl);
-                }}
-            />
-            <Button style={styles.button} title="Share" onPress={() => {}} />
+            <View style={styles.buttonContainer}>
+                <Button
+                    style={styles.button}
+                    title="Download"
+                    color="green"
+                    onPress={() => {
+                        // _handlePressImage(route.params.dogUrl);
+                        // downloadFileWithUrl(route.params.dogUrl);
+                        downloadFile(route.params.dogUrl);
+                    }}
+                />
+            </View>
         </SafeAreaView>
     );
 };
@@ -34,15 +38,18 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: "center",
         justifyContent: "center",
-        position: "relative",
     },
     bigImage: {
         width: "100%",
         maxWidth: 600,
-        position: "absolute",
     },
     text: {
         display: "none",
+    },
+    buttonContainer: {
+        flex: 1,
+        flexDirection: "column",
+        justifyContent: "space-around",
     },
     button: {
         flex: 1,

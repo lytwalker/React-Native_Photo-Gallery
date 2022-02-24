@@ -26,7 +26,7 @@ const Screens = ({ navigation, route }) => {
                 }}>
                 <Stack.Screen name="Welcome" component={HomeScreen} />
                 <Stack.Screen name="Breed List" component={ByBreed} />
-                <Stack.Screen name="Dog" component={DogDetails} />
+                <Stack.Screen name="Dog" component={DogDetails} options={{ title: "Details" }} />
             </Stack.Navigator>
         </NavigationContainer>
     );
